@@ -14,7 +14,7 @@ function mConn()
     // 静态变量，使mConn在同一个页面 数据库只连接一次
     static $conn = null;
     if ($conn === null) {
-        $cfg = include ROOT.'/lib/config.php';;
+        $cfg = include ROOT_PATH.'/lib/config.php';;
         $conn = mysqli_connect($cfg['host'], $cfg['user'], $cfg['password'], $cfg['db']);
         mysqli_set_charset($conn, 'utf8');
     }
@@ -31,7 +31,7 @@ function mQuery($sql)
     $ret = mysqli_query(mConn(), $sql);
 
     if ($ret === false) {
-        mLog($sql."\n".mysqli_error());
+        mLog($sql."\n".mysqli_error(mConn()));
         return $ret;
     }
     mLog($sql);
@@ -90,7 +90,7 @@ function mExec($table, $data, $act='insert', $where='0')
         foreach ($data as $k => $v) {
             $sql .= $k . "='" . $v . "', ";
         }
-        $sql = rtrim($sql, ",");
+        $sql = rtrim($sql, ", ");
         $sql .= ' where ' . $where;
     }
     return mQuery($sql);
@@ -115,7 +115,7 @@ function getLastId()
  */
 function mLog($log)
 {
-    $path = ROOT.'/log'.date('Ymd', time()).'.txt';
+    $path = ROOT_PATH.'/log'.date('Ymd', time()).'.txt';
     $head = '++++++++++++++++++++++++++++++++++'."\n".date('Y/m/d H:i:s', time())."\n";
     file_put_contents($path, $head.$log."\n\n", FILE_APPEND);
 }

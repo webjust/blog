@@ -8,7 +8,7 @@
 function success($msg='成功')
 {
     $ret = 'success';
-    include ROOT.'/view/admin/info.html';
+    include ROOT_PATH.'/view/admin/info.html';
 }
 
 /**
@@ -20,5 +20,10 @@ function success($msg='成功')
 function error($msg='失败')
 {
     $ret = 'error';
-    include ROOT.'/view/admin/info.html';
+    include ROOT_PATH.'/view/admin/info.html';
+}
+
+function redirect($msg='提示消息', $url)
+{
+    return "<script>alert('{$msg}'); window.location.href='{$url}'</script>";
 }
