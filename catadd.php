@@ -14,7 +14,7 @@ if (empty($_POST))
      * 第1步：连接数据库，选择数据库
      * 第2步：判断数据库连接是否连接成功
      */
-    $conn = @mysqli_connect('localhost', 'root', 'root', 'demo') or die('数据库连接失败！' . mysqli_connect_error());
+    $conn = mysqli_connect('localhost', 'root', 'root', 'demo') or die('数据库连接失败！' . mysqli_connect_error());
 
     /**
      * 第3步：设置字符集

@@ -33,5 +33,6 @@ mysqli_free_result($ret);
 mysqli_close($conn);
 
 // 显示分类列表页
-include('./view/admin/catlist.html')
+include('./lib/init.php');
+include('./view/admin/catlist.html');
 ?>

@@ -1,6 +1,7 @@
 <?php
 /**
  * mysql操作的函数
+ *
  * @author    webjust [604854119@qq.com]
  */
 
@@ -13,7 +14,8 @@ function mConn()
     // 静态变量，使mConn在同一个页面 数据库只连接一次
     static $conn = null;
     if ($conn === null) {
-        $conn = mysqli_connect('localhost', 'root', 'root', 'demo');
+        $cfg = include ROOT.'/lib/config.php';;
+        $conn = mysqli_connect($cfg['host'], $cfg['user'], $cfg['password'], $cfg['db']);
         mysqli_set_charset($conn, 'utf8');
     }
     return $conn;
@@ -26,7 +28,14 @@ function mConn()
  */
 function mQuery($sql)
 {
-    return mysqli_query(mConn(), $sql);
+    $ret = mysqli_query(mConn(), $sql);
+
+    if ($ret === false) {
+        mLog($sql."\n".mysqli_error());
+        return $ret;
+    }
+    mLog($sql);
+    return $ret;
 }
 
 /**
@@ -96,4 +105,17 @@ function mExec($table, $data, $act='insert', $where='0')
 function getLastId()
 {
     return mysqli_insert_id(mConn());
+}
+
+/**
+ * 记录执行的SQL记录，及报错信息
+ *
+ * @param     $log 记录的信息
+ * @return    void
+ */
+function mLog($log)
+{
+    $path = ROOT.'/log'.date('Ymd', time()).'.txt';
+    $head = '++++++++++++++++++++++++++++++++++'."\n".date('Y/m/d H:i:s', time())."\n";
+    file_put_contents($path, $head.$log."\n\n", FILE_APPEND);
 }
