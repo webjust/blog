@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="./css/reset.css">
 <link rel="stylesheet" href="./css/adm.css">
+=======
+    <link rel="stylesheet" href="<?php echo ROOT.'/public/css/reset.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT.'/public/css/adm.css' ?>">
+>>>>>>> 6d2d775a9d24c1c42e9171962e6cf3fc62790a76
 </head>
 <body>
     <header>
@@ -35,12 +40,24 @@
             </aside>
         </div>
         <div id="rside">
+<<<<<<< HEAD
             <div class="succ">成功</div>
             <div class="danger">出错</div>
+=======
+            <?php if ($ret=='sucess') { ?>
+            <div class="succ"><?php echo $msg; ?></div>
+            <?php } elseif ($ret=='error') { ?>
+            <div class="danger"><?php echo $msg; ?></div>
+            <?php } ?>
+>>>>>>> 6d2d775a9d24c1c42e9171962e6cf3fc62790a76
         </div>
     </div>
     <footer>
         Copyright &copy; 2015 · GeneratePress · WordPress
     </footer>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 6d2d775a9d24c1c42e9171962e6cf3fc62790a76
